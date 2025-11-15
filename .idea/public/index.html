@@ -9,131 +9,646 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+            background: #0a0f2d;
         }
 
+        /* Фон с северным сиянием */
+        .aurora-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Северное сияние */
+        .aurora {
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 120%;
+            height: 60%;
+            background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    rgba(94, 234, 212, 0.1) 20%,
+                    rgba(45, 198, 234, 0.2) 40%,
+                    rgba(138, 83, 255, 0.15) 60%,
+                    rgba(255, 107, 107, 0.1) 80%,
+                    transparent 100%
+            );
+            filter: blur(40px);
+            animation: auroraFlow 20s ease-in-out infinite;
+            transform: skewY(-5deg);
+        }
+
+        .aurora-2 {
+            top: 10%;
+            left: -5%;
+            background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    rgba(138, 83, 255, 0.15) 30%,
+                    rgba(45, 198, 234, 0.25) 50%,
+                    rgba(94, 234, 212, 0.1) 70%,
+                    transparent 100%
+            );
+            animation: auroraFlow 25s ease-in-out infinite reverse;
+            filter: blur(30px);
+            opacity: 0.7;
+        }
+
+        .aurora-3 {
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    rgba(255, 107, 107, 0.1) 25%,
+                    rgba(138, 83, 255, 0.2) 45%,
+                    rgba(45, 198, 234, 0.15) 65%,
+                    transparent 100%
+            );
+            animation: auroraFlow 30s ease-in-out infinite 5s;
+            filter: blur(50px);
+            opacity: 0.5;
+        }
+
+        @keyframes auroraFlow {
+            0%, 100% {
+                transform: translateX(-10%) skewY(-5deg) scale(1);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateX(5%) skewY(-3deg) scale(1.1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-5%) skewY(-7deg) scale(0.9);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateX(8%) skewY(-4deg) scale(1.05);
+                opacity: 0.9;
+            }
+        }
+
+        /* Горы */
+        .mountains {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            z-index: 1;
+        }
+
+        .mountain-range {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 10%, #1a1f4d 90%);
+            clip-path: polygon(
+                    0% 100%,
+                    10% 70%, 20% 80%, 30% 60%, 40% 85%,
+                    50% 50%, 60% 75%, 70% 55%, 80% 90%,
+                    90% 65%, 100% 100%
+            );
+            animation: mountainShift 90s infinite linear;
+        }
+
+        .mountain-range-2 {
+            background: linear-gradient(transparent 20%, #151a45 80%);
+            clip-path: polygon(
+                    0% 100%,
+                    5% 80%, 15% 60%, 25% 85%, 35% 70%,
+                    45% 90%, 55% 65%, 65% 75%, 75% 55%,
+                    85% 80%, 95% 70%, 100% 100%
+            );
+            animation: mountainShift 120s infinite linear reverse;
+            opacity: 0.8;
+        }
+
+        .mountain-range-3 {
+            background: linear-gradient(transparent 30%, #10153d 70%);
+            clip-path: polygon(
+                    0% 100%,
+                    8% 85%, 18% 95%, 28% 75%, 38% 100%,
+                    48% 70%, 58% 85%, 68% 65%, 78% 95%,
+                    88% 80%, 98% 90%, 100% 100%
+            );
+            animation: mountainShift 150s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes mountainShift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        /* Звезды */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                    radial-gradient(1px 1px at 40px 70px, #5eead4, transparent),
+                    radial-gradient(1px 1px at 90px 40px, #8a53ff, transparent),
+                    radial-gradient(2px 2px at 130px 80px, #2dc6ea, transparent),
+                    radial-gradient(1px 1px at 160px 30px, #fff, transparent),
+                    radial-gradient(1px 1px at 200px 90px, #5eead4, transparent),
+                    radial-gradient(2px 2px at 250px 60px, #8a53ff, transparent);
+            background-repeat: repeat;
+            background-size: 300px 200px;
+            animation: starsTwinkle 8s ease-in-out infinite;
+        }
+
+        .stars::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                    radial-gradient(1px 1px at 50px 120px, #2dc6ea, transparent),
+                    radial-gradient(2px 2px at 80px 150px, #5eead4, transparent),
+                    radial-gradient(1px 1px at 120px 180px, #8a53ff, transparent),
+                    radial-gradient(1px 1px at 180px 140px, #2dc6ea, transparent),
+                    radial-gradient(2px 2px at 220px 110px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 250px 250px;
+            animation: starsTwinkle 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes starsTwinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Контейнер формы */
         .container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            padding: 40px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow:
+                    0 25px 50px rgba(0, 0, 0, 0.3),
+                    0 0 0 1px rgba(255, 255, 255, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            padding: 50px 40px;
             width: 100%;
             max-width: 500px;
+            margin: 80px auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(255, 255, 255, 0.85) 100%);
         }
 
+        /* Заголовок */
         h1 {
             text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 28px;
+            color: #1a1f4d;
+            margin-bottom: 40px;
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8a53ff, #2dc6ea, #5eead4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(138, 83, 255, 0.2);
+            position: relative;
         }
 
+        h1::before {
+            content: '👤';
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            filter: drop-shadow(0 0 10px rgba(138, 83, 255, 0.5));
+        }
+
+        h1::after {
+            content: '🔐';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            filter: drop-shadow(0 0 10px rgba(45, 198, 234, 0.5));
+        }
+
+        /* Группы формы */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a1f4d;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
+            padding: 16px 20px;
+            border: 2px solid rgba(138, 83, 255, 0.1);
+            border-radius: 15px;
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1f4d;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #8a53ff;
+            background: white;
+            box-shadow:
+                    0 8px 25px rgba(138, 83, 255, 0.3),
+                    0 0 0 4px rgba(138, 83, 255, 0.1);
+            transform: translateY(-3px);
         }
 
-        button {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        input::placeholder {
+            color: #a0a4b8;
+        }
+
+        /* Поле пароля с кнопкой показа */
+        .password-input {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
             border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
             cursor: pointer;
+            font-size: 18px;
+            color: #8a53ff;
+            padding: 5px;
+            border-radius: 5px;
             transition: all 0.3s ease;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .toggle-password:hover {
+            background: rgba(138, 83, 255, 0.1);
         }
 
-        .message {
-            margin-top: 20px;
+        /* Кнопки */
+        button[type="submit"] {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #8a53ff, #2dc6ea, #5eead4);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(138, 83, 255, 0.4);
+            animation: gradientShift 4s ease infinite;
+            margin-bottom: 15px;
+        }
+
+        .view-users-btn {
+            width: 100%;
             padding: 15px;
-            border-radius: 8px;
+            background: transparent;
+            color: #8a53ff;
+            border: 2px solid #8a53ff;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                    0 15px 40px rgba(138, 83, 255, 0.6),
+                    0 0 20px rgba(94, 234, 212, 0.4);
+        }
+
+        .view-users-btn:hover {
+            background: #8a53ff;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 83, 255, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        button[type="submit"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.2),
+                    transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        button[type="submit"]:hover::before {
+            left: 100%;
+        }
+
+        /* Сообщения */
+        .message {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
             display: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+            linear-gradient(135deg, #8a53ff, #2dc6ea) border-box;
         }
 
         .success {
-            background: #d4edda;
+            background: linear-gradient(white, white) padding-box,
+            linear-gradient(135deg, #5eead4, #2dc6ea) border-box;
             color: #155724;
-            border: 1px solid #c3e6cb;
         }
 
         .error {
-            background: #f8d7da;
+            background: linear-gradient(white, white) padding-box,
+            linear-gradient(135deg, #ff6b6b, #8a53ff) border-box;
             color: #721c24;
-            border: 1px solid #f5c6cb;
+        }
+
+        /* Модальное окно пользователей */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            background: linear-gradient(135deg, #8a53ff, #2dc6ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #8a53ff;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(138, 83, 255, 0.1);
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e8eeff;
+        }
+
+        .users-table th {
+            background: linear-gradient(135deg, #8a53ff, #2dc6ea);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .users-table tr:hover {
+            background: rgba(138, 83, 255, 0.05);
+        }
+
+        .user-count {
+            text-align: center;
+            color: #8a53ff;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                margin: 40px 20px;
+                padding: 30px 25px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h1::before, h1::after {
+                display: none;
+            }
+
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+
+            .users-table {
+                font-size: 14px;
+            }
+
+            .users-table th,
+            .users-table td {
+                padding: 8px 10px;
+            }
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Снег */
+        .snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            animation: snowFall linear infinite;
+        }
+
+        @keyframes snowFall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
+<!-- Фон с северным сиянием и горами -->
+<div class="aurora-background">
+    <div class="aurora"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
+    <div class="stars"></div>
+    <div class="mountains">
+        <div class="mountain-range"></div>
+        <div class="mountain-range mountain-range-2"></div>
+        <div class="mountain-range mountain-range-3"></div>
+    </div>
+    <div class="snow" id="snowContainer"></div>
+</div>
+
+<!-- Форма регистрации -->
 <div class="container">
-    <h1>📝 Регистрация пользователя</h1>
+    <h1>Регистрация</h1>
     <form id="registrationForm">
         <div class="form-group">
-            <label for="firstName">Имя:</label>
-            <input type="text" id="firstName" name="firstName" required>
+            <label for="username">Имя пользователя *</label>
+            <input type="text" id="username" name="username" placeholder="Придумайте логин" required minlength="3">
         </div>
 
         <div class="form-group">
-            <label for="lastName">Фамилия:</label>
-            <input type="text" id="lastName" name="lastName" required>
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <label for="password">Пароль *</label>
+            <div class="password-input">
+                <input type="password" id="password" name="password" placeholder="Не менее 6 символов" required minlength="6">
+                <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="phone">Телефон:</label>
-            <input type="tel" id="phone" name="phone" required>
+            <label for="confirmPassword">Подтвердите пароль *</label>
+            <div class="password-input">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required minlength="6">
+                <button type="button" class="toggle-password" onclick="toggleConfirmPassword()">👁️</button>
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="age">Возраст:</label>
-            <input type="number" id="age" name="age" min="1" max="120" required>
+            <label for="age">Возраст</label>
+            <input type="number" id="age" name="age" min="1" max="120" placeholder="25">
         </div>
 
         <div class="form-group">
-            <label for="gender">Пол:</label>
-            <select id="gender" name="gender" required>
+            <label for="gender">Пол</label>
+            <select id="gender" name="gender">
                 <option value="">Выберите пол</option>
                 <option value="male">Мужской</option>
                 <option value="female">Женский</option>
@@ -142,22 +657,193 @@
         </div>
 
         <div class="form-group">
-            <label for="city">Город:</label>
-            <input type="text" id="city" name="city" required>
+            <label for="city">Город</label>
+            <input type="text" id="city" name="city" placeholder="Введите ваш город">
         </div>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit">
+            🚀 Создать аккаунт
+        </button>
+
+        <button type="button" class="view-users-btn" onclick="showUsers()">
+            👥 Показать всех пользователей
+        </button>
     </form>
 
     <div id="message" class="message"></div>
 </div>
 
+<!-- Модальное окно со списком пользователей -->
+<div id="usersModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>📊 Зарегистрированные пользователи</h2>
+            <button class="close-btn" onclick="closeUsersModal()">✕</button>
+        </div>
+        <div id="userCount" class="user-count"></div>
+        <div id="usersList"></div>
+    </div>
+</div>
+
 <script>
+    // Функции для показа/скрытия пароля
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.querySelector('.toggle-password');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleBtn.textContent = '🔒';
+        } else {
+            passwordInput.type = 'password';
+            toggleBtn.textContent = '👁️';
+        }
+    }
+
+    function toggleConfirmPassword() {
+        const confirmInput = document.getElementById('confirmPassword');
+        const toggleBtn = document.querySelectorAll('.toggle-password')[1];
+        if (confirmInput.type === 'password') {
+            confirmInput.type = 'text';
+            toggleBtn.textContent = '🔒';
+        } else {
+            confirmInput.type = 'password';
+            toggleBtn.textContent = '👁️';
+        }
+    }
+
+    // Валидация паролей
+    function validatePasswords() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert('Пароли не совпадают!');
+            return false;
+        }
+
+        if (password.length < 6) {
+            alert('Пароль должен содержать не менее 6 символов!');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Показать модальное окно с пользователями
+    function showUsers() {
+        fetch('/users')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayUsers(data.users);
+                    document.getElementById('usersModal').style.display = 'block';
+                } else {
+                    alert('Ошибка при загрузке пользователей');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка при загрузке пользователей');
+            });
+    }
+
+    // Закрыть модальное окно
+    function closeUsersModal() {
+        document.getElementById('usersModal').style.display = 'none';
+    }
+
+    // Отобразить список пользователей
+    function displayUsers(users) {
+        const usersList = document.getElementById('usersList');
+        const userCount = document.getElementById('userCount');
+
+        userCount.textContent = `Всего зарегистрировано пользователей: ${users.length}`;
+
+        if (users.length === 0) {
+            usersList.innerHTML = '<p style="text-align: center; color: #666;">Пользователи не найдены</p>';
+            return;
+        }
+
+        let tableHTML = `
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя пользователя</th>
+                            <th>Email</th>
+                            <th>Возраст</th>
+                            <th>Пол</th>
+                            <th>Город</th>
+                            <th>Дата регистрации</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+        users.forEach(user => {
+            const regDate = new Date(user.registrationDate).toLocaleDateString('ru-RU');
+            tableHTML += `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.age || '-'}</td>
+                        <td>${getGenderText(user.gender)}</td>
+                        <td>${user.city || '-'}</td>
+                        <td>${regDate}</td>
+                    </tr>
+                `;
+        });
+
+        tableHTML += '</tbody></table>';
+        usersList.innerHTML = tableHTML;
+    }
+
+    // Получить текст для поля пола
+    function getGenderText(gender) {
+        const genderMap = {
+            'male': 'Мужской',
+            'female': 'Женский',
+            'other': 'Другой'
+        };
+        return genderMap[gender] || '-';
+    }
+
+    // Создание снежинок
+    function createSnow() {
+        const snowContainer = document.getElementById('snowContainer');
+        const snowflakes = ['❄', '✦', '•', '⋅'];
+
+        for (let i = 0; i < 50; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            snowflake.style.animationDelay = Math.random() * 10 + 's';
+            snowflake.style.fontSize = (Math.random() * 10 + 8) + 'px';
+            snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+            snowContainer.appendChild(snowflake);
+        }
+    }
+
+    // Обработка формы регистрации
     document.getElementById('registrationForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
+        // Проверяем пароли
+        if (!validatePasswords()) {
+            return;
+        }
+
         const formData = new FormData(this);
         const data = Object.fromEntries(formData.entries());
+
+        // Показываем загрузку
+        const button = this.querySelector('button[type="submit"]');
+        const originalText = button.innerHTML;
+        button.innerHTML = '⏳ Создание аккаунта...';
+        button.disabled = true;
 
         fetch('/register', {
             method: 'POST',
@@ -183,10 +869,34 @@
             .catch(error => {
                 console.error('Error:', error);
                 const messageEl = document.getElementById('message');
-                messageEl.textContent = 'Произошла ошибка при отправке формы';
+                messageEl.textContent = 'Произошла ошибка при создании аккаунта';
                 messageEl.className = 'message error';
                 messageEl.style.display = 'block';
+            })
+            .finally(() => {
+                // Восстанавливаем кнопку
+                button.innerHTML = originalText;
+                button.disabled = false;
             });
+    });
+
+    // Закрыть модальное окно при клике вне его
+    window.onclick = function(event) {
+        const modal = document.getElementById('usersModal');
+        if (event.target === modal) {
+            closeUsersModal();
+        }
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        createSnow();
+
+        // Анимация появления полей формы
+        const formGroups = document.querySelectorAll('.form-group');
+        formGroups.forEach((group, index) => {
+            group.style.animation = `fadeInUp 0.8s ease-out ${index * 0.1}s both`;
+        });
     });
 </script>
 </body>
